@@ -26,8 +26,6 @@ public class Main{
 		        JButton jb2 = new JButton("重置");
 		        //设置登陆按钮功能
 		        jb1.addActionListener(new ActionListener() {
-		            
-					@SuppressWarnings("deprecation")
 					@Override
 		            public void actionPerformed(ActionEvent e) {
 		            	System.out.println(jt.getText());
@@ -35,15 +33,11 @@ public class Main{
 		            	
 		            	jt.setText("");//此处原则上应改写为加密后的ID号
 //		                jpf.setText("");	//次数可以为“*******”	 
-		                if(jt.getText().equals("123")){
+		                		        
+		            	if(jt.getText().equals("")){
 		                    System.out.println("登陆成功！");
 		                    JOptionPane.showMessageDialog(null, "登录成功！");
-		                }
-		                //why it don't work?		     
-		                else {
-		                    System.out.println("登录失败！");
-		                    JOptionPane.showMessageDialog(null, "登录失败！");
-		                    int flag = 1;
+		                    int flag = 0;
 		                    switch(flag) {
 		                    	case 0:
 		                    		new StuOperation();dispose();
@@ -52,13 +46,18 @@ public class Main{
 		                    		new TeaOperation();dispose();
 		                    		break;
 		                    	case 2:
-		                    		new AdmOperation();dispose();
+//		                    		new AdmOperation();dispose();
 		                    		break;
 		                    }
 		                }
-		            //姑且先把测试放在这里
+		                else {
+		                    System.out.println("登录失败！");
+		                    JOptionPane.showMessageDialog(null, "登录失败！");
+		                    JOptionPane.showMessageDialog(null, "请输入正确的ID！");
+		                }		            
 		            }
 		        });
+		        
 		        //设置重置按钮功能
 		        jb2.addActionListener(new ActionListener() {
 		            @Override
@@ -137,6 +136,8 @@ public class Main{
 					@Override
 		            public void actionPerformed(ActionEvent e) {
 		            	System.out.println("修改信息");
+		            	new StuEdit();
+		            	dispose();
 		            }
 		        });
 				//设置返回按钮功能
@@ -172,6 +173,95 @@ public class Main{
 		    }
 		}
 		
+		//学生信息修改页面
+		@SuppressWarnings("serial")
+		public static class StuEdit extends JFrame {
+			public StuEdit() {
+				super();
+				this.setTitle("信息修改");
+		        //创建容器
+		        Container cont = getContentPane();
+		        //关闭绝对布局 
+		        this.setLayout(null);
+		        //创建控件
+		        JLabel jl1 = new JLabel("姓名");
+		        JLabel jl2 = new JLabel("生日");
+		        JLabel jl3 = new JLabel("学院");
+		        JLabel jl4 = new JLabel("专业");
+		        JLabel jl5 = new JLabel("新密码");
+		        JLabel jl6 = new JLabel("确认密码");
+		        JButton jb1 = new JButton("提交");
+		        JButton jb2 = new JButton("返回");
+		        JTextField jt1 = new JTextField("",20);
+		        JTextField jt2 = new JTextField("",20);
+		        JTextField jt3 = new JTextField("",20);
+		        JTextField jt4 = new JTextField("",20);
+		        JTextField jt5 = new JTextField("",20);
+		        JTextField jt6 = new JTextField("",20);
+		        JRadioButton jr1 = new JRadioButton("男",true);
+		        JRadioButton jr2 = new JRadioButton("女");
+		        //设置提交按钮功能
+		        jb1.addActionListener(new ActionListener() {
+		            
+					@Override
+		            public void actionPerformed(ActionEvent e) {
+						System.out.println("提交成功");
+						JOptionPane.showMessageDialog(null, "提交成功！");
+		            }
+		        });
+				//设置返回按钮功能
+				jb2.addActionListener(new ActionListener() {
+					@Override
+		            public void actionPerformed(ActionEvent e) {
+		            	System.out.println("返回");
+		            	new StuOperation();
+		            	dispose();
+		            }
+		        });
+				
+				
+		        //将控件加入容器中		       
+				cont.add(jl1);
+				cont.add(jl2);
+				cont.add(jl3);
+				cont.add(jl4);
+				cont.add(jl5);
+				cont.add(jl6);
+				cont.add(jb1);
+		        cont.add(jb2);
+		        cont.add(jt1);
+		        cont.add(jt2);
+		        cont.add(jt3);
+		        cont.add(jt4);
+		        cont.add(jt5);
+		        cont.add(jt6);
+		        cont.add(jr1);
+		        cont.add(jr2);
+		        //控件在容器中的位置及大小
+		        jl1.setBounds(50,50,75,40);
+		        jr1.setBounds(150,125,75,40);
+		        jr2.setBounds(250,125,75,40);
+		        jl2.setBounds(50,200,75,40);
+		        jl3.setBounds(50,275,75,40);
+		        jl4.setBounds(50,350,75,40);
+		        jl5.setBounds(50,425,75,40);
+		        jl6.setBounds(50,500,75,40);
+		        jt1.setBounds(150,50,300,40);
+		        jt2.setBounds(150,200,300,40);
+		        jt3.setBounds(150,275,300,40);
+		        jt4.setBounds(150,350,300,40);
+		        jt5.setBounds(150,425,300,40);
+		        jt6.setBounds(150,500,300,40);
+		        jb1.setBounds(100,600,100,50);
+		        jb2.setBounds(300,600,100,50);
+		        //窗体在电脑中的位置及大小
+		        this.setBounds(720, 150, 500, 750);
+		        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		        //设置窗体不可以拉伸
+		        this.setResizable(false);
+		        this.setVisible(true);
+		    }
+		}
 		
 		//教师登录界面
 		@SuppressWarnings("serial")
