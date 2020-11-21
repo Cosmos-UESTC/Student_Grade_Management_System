@@ -310,6 +310,9 @@ public class Main{
 		}
 		
 		//学生成绩查询页面
+		public static class StuCheck extends JFrame{
+			
+		}
 		//教师登录界面
 		@SuppressWarnings("serial")
 		public static class TeaOperation extends JFrame {
