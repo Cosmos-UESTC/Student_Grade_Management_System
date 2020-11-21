@@ -6,9 +6,9 @@ import com.cn.model.Student;
 
 public class StudentDao {
 	//从文件读取学生信息
-	public ArrayList<Student> readStudent(){
+	public static ArrayList<Student> readStudent(){
 		ArrayList<Student> list = new ArrayList<>();  //新建链表
-		try (BufferedReader br = new BufferedReader(new FileReader("student.txt"))) {
+		try (BufferedReader br = new BufferedReader(new FileReader("D:\\Eclipse-Workplace\\MNO_Grade_Management_System/src/data/student.txt"))) {
 			String line = br.readLine();
 			String[] textData = null;
 			while (line != null) {
@@ -32,12 +32,12 @@ public class StudentDao {
 	}
 //******************************************************//
 	//写学生信息到文件
-	public int writeStudent(Student student) {
+	public static int writeStudent(Student student) {
 		ArrayList<Student> list = readStudent();
 		list.add(student);
 		int num = 0;
 		try {
-			FileWriter fileWriter = new FileWriter("student.txt");
+			FileWriter fileWriter = new FileWriter("D:\\Eclipse-Workplace\\MNO_Grade_Management_System/src/data/student.txt");
 			for (int i = 0; i < list.size(); i++) {
 				Student stu = list.get(i);
 				fileWriter.write(
@@ -54,7 +54,7 @@ public class StudentDao {
 	}
 //******************************************************//
 	//删除对应学生信息
-	public int delStudent(String name) {
+	public static int delStudent(String name) {
 		ArrayList<Student> list = readStudent();
 		int num = 0;
 		for (int i = 0; i < list.size(); i++) {
@@ -63,7 +63,7 @@ public class StudentDao {
 			}
 		}
 		try {
-			FileWriter fileWriter = new FileWriter("student.txt");
+			FileWriter fileWriter = new FileWriter("D:\\Eclipse-Workplace\\MNO_Grade_Management_System/src/data/student.txt");
 			for (int i = 0; i < list.size(); i++) {
 				Student stu = list.get(i);
 				fileWriter.write(
@@ -80,14 +80,14 @@ public class StudentDao {
 	}
 //******************************************************//
 	//查询学生信息
-	public ArrayList<Student> findStudent(String name) {
+	public static ArrayList<Student> findStudent(String ID) {
 		ArrayList<Student> list = readStudent();
 		ArrayList<Student> newlist = new ArrayList<>();
 		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i).getName().contains(name)){
-				newlist.add(list.get(i));
+			if (list.get(i).getID().contains(ID)){
+				newlist.add(list.get(i));				
 			}
 		}	
-		return newlist;
+		return newlist;		
 	}
 }

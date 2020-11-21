@@ -6,9 +6,9 @@ import com.cn.model.Teacher;
 
 public class TeacherDao {
 	//从文件读取教师信息
-	public ArrayList<Teacher> readTeacher(){
+	public static ArrayList<Teacher> readTeacher(){
 		ArrayList<Teacher> list = new ArrayList<>();  //新建链表
-		try (BufferedReader br = new BufferedReader(new FileReader("Teacher.txt"))) {
+		try (BufferedReader br = new BufferedReader(new FileReader("D:\\Eclipse-Workplace\\MNO_Grade_Management_System/src/data/teacher.txt"))) {
 			String line = br.readLine();
 			String[] textData = null;
 			while (line != null) {
@@ -32,12 +32,12 @@ public class TeacherDao {
 	}
 //******************************************************//
 	//写教师信息到文件
-	public int writeTeacher(Teacher teacher) {
+	public static int writeTeacher(Teacher teacher) {
 		ArrayList<Teacher> list = readTeacher();
 		list.add(teacher);
 		int num = 0;
 		try {
-			FileWriter fileWriter = new FileWriter("Teacher.txt");
+			FileWriter fileWriter = new FileWriter("D:\\Eclipse-Workplace\\MNO_Grade_Management_System/src/data/teacher.txt");
 			for (int i = 0; i < list.size(); i++) {
 				Teacher stu = list.get(i);
 				fileWriter.write(
@@ -63,7 +63,7 @@ public class TeacherDao {
 			}
 		}
 		try {
-			FileWriter fileWriter = new FileWriter("Teacher.txt");
+			FileWriter fileWriter = new FileWriter("D:\\Eclipse-Workplace\\MNO_Grade_Management_System/src/data/teacher.txt");
 			for (int i = 0; i < list.size(); i++) {
 				Teacher stu = list.get(i);
 				fileWriter.write(
@@ -80,7 +80,7 @@ public class TeacherDao {
 	}
 //******************************************************//
 	//查询教师信息
-	public ArrayList<Teacher> findTeacher(String name) {
+	public static ArrayList<Teacher> findTeacher(String name) {
 		ArrayList<Teacher> list = readTeacher();
 		ArrayList<Teacher> newlist = new ArrayList<>();
 		for (int i = 0; i < list.size(); i++) {

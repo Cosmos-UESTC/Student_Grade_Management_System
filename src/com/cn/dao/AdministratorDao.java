@@ -27,9 +27,9 @@ public class AdministratorDao {
 //	    }
 	
 		//从文件读取管理员信息
-		public ArrayList<Admin> readAdmin(){
+		public static ArrayList<Admin> readAdmin(){
 			ArrayList<Admin> list = new ArrayList<>();  //新建链表
-			try (BufferedReader br = new BufferedReader(new FileReader("Administrator.txt"))) {
+			try (BufferedReader br = new BufferedReader(new FileReader("D:\\Eclipse-Workplace\\MNO_Grade_Management_System/src/data/administrator.txt"))) {
 				String line = br.readLine();
 				String[] textData = null;
 				while (line != null) {
@@ -53,12 +53,12 @@ public class AdministratorDao {
 		}
 	//******************************************************//
 		//写管理员信息到文件
-		public int writeAdmin(Admin admin) {
+		public static int writeAdmin(Admin admin) {
 			ArrayList<Admin> list = readAdmin();
 			list.add(admin);
 			int num = 0;
 			try {
-				FileWriter fileWriter = new FileWriter("Administrator.txt");
+				FileWriter fileWriter = new FileWriter("D:\\Eclipse-Workplace\\MNO_Grade_Management_System/src/data/administrator.txt");
 				for (int i = 0; i < list.size(); i++) {
 					Admin stu = list.get(i);
 					fileWriter.write(
@@ -84,7 +84,7 @@ public class AdministratorDao {
 				}
 			}
 			try {
-				FileWriter fileWriter = new FileWriter("Administrator.txt");
+				FileWriter fileWriter = new FileWriter("D:\\Eclipse-Workplace\\MNO_Grade_Management_System/src/data/administrator.txt");
 				for (int i = 0; i < list.size(); i++) {
 					Admin stu = list.get(i);
 					fileWriter.write(
@@ -101,7 +101,7 @@ public class AdministratorDao {
 		}
 	//******************************************************//
 		//查询管理员信息
-		public ArrayList<Admin> findAdmin(String name) {
+		public static ArrayList<Admin> findAdmin(String name) {
 			ArrayList<Admin> list = readAdmin();
 			ArrayList<Admin> newlist = new ArrayList<>();
 			for (int i = 0; i < list.size(); i++) {
