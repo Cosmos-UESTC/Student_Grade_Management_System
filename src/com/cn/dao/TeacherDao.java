@@ -54,11 +54,11 @@ public class TeacherDao {
 	}
 //******************************************************//
 	//删除对应教师信息
-	public int delTeacher(String name) {
+	public int delTeacher(String ID) {
 		ArrayList<Teacher> list = readTeacher();
 		int num = 0;
 		for (int i = 0; i < list.size(); i++) {
-			if (name.equals(list.get(i).getName())) {
+			if (ID.equals(list.get(i).getID())) {
 				list.remove(i);
 			}
 		}
@@ -80,11 +80,11 @@ public class TeacherDao {
 	}
 //******************************************************//
 	//查询教师信息
-	public static ArrayList<Teacher> findTeacher(String name) {
+	public static ArrayList<Teacher> findTeacher(String ID) {
 		ArrayList<Teacher> list = readTeacher();
 		ArrayList<Teacher> newlist = new ArrayList<>();
 		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i).getName().contains(name)){
+			if (list.get(i).getName().equals(ID)){
 				newlist.add(list.get(i));
 			}
 		}	

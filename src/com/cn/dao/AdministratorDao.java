@@ -75,11 +75,11 @@ public class AdministratorDao {
 		}
 	//******************************************************//
 		//删除对应管理员信息
-		public int delAdmin(String name) {
+		public int delAdmin(String ID) {
 			ArrayList<Admin> list = readAdmin();
 			int num = 0;
 			for (int i = 0; i < list.size(); i++) {
-				if (name.equals(list.get(i).getName())) {
+				if (ID.equals(list.get(i).getID())) {
 					list.remove(i);
 				}
 			}
@@ -101,11 +101,11 @@ public class AdministratorDao {
 		}
 	//******************************************************//
 		//查询管理员信息
-		public static ArrayList<Admin> findAdmin(String name) {
+		public static ArrayList<Admin> findAdmin(String ID) {
 			ArrayList<Admin> list = readAdmin();
 			ArrayList<Admin> newlist = new ArrayList<>();
 			for (int i = 0; i < list.size(); i++) {
-				if (list.get(i).getName().contains(name)){
+				if (list.get(i).getID().equals(ID)){
 					newlist.add(list.get(i));
 				}
 			}	

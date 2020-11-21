@@ -54,11 +54,11 @@ public class StudentDao {
 	}
 //******************************************************//
 	//删除对应学生信息
-	public static int delStudent(String name) {
+	public static int delStudent(String ID) {
 		ArrayList<Student> list = readStudent();
 		int num = 0;
 		for (int i = 0; i < list.size(); i++) {
-			if (name.equals(list.get(i).getName())) {
+			if (ID.equals(list.get(i).getID())) {
 				list.remove(i);
 			}
 		}
@@ -84,7 +84,7 @@ public class StudentDao {
 		ArrayList<Student> list = readStudent();
 		ArrayList<Student> newlist = new ArrayList<>();
 		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i).getID().contains(ID)){
+			if (list.get(i).getID().equals(ID)){
 				newlist.add(list.get(i));				
 			}
 		}	

@@ -69,7 +69,7 @@ public class Main{
 //		    			Admin foundAdmin = newlist2.get(0);
 //		    			System.out.println("Name="+foundAdmin.getName()+" "+"ID="+foundAdmin.getID());
 		    			
-		            	jt.setText("");//此处原则上应改写为加密后的ID号
+		            	jt.setText("*********");//此处原则上应改写为加密后的ID号
 //		                jpf.setText("");	//次数可以为“*******”	 
 		            	     
 		                    
@@ -188,11 +188,11 @@ public class Main{
 		            	dispose();
 		            }
 		        });
-				//设置返回按钮功能
+				//设置退出按钮功能
 				jb5.addActionListener(new ActionListener() {
 					@Override
 		            public void actionPerformed(ActionEvent e) {
-		            	System.out.println("返回");
+		            	System.out.println("退出");
 		            	new Login();
 		            	dispose();
 		            }
@@ -233,21 +233,44 @@ public class Main{
 		        JButton jb1 = new JButton("提交");JButton jb2 = new JButton("返回");
 		        JTextField jt1 = new JTextField("",20);JTextField jt2 = new JTextField("",20);
 		        JTextField jt3 = new JTextField("",20);JTextField jt4 = new JTextField("",20);
-		        JTextField jt5 = new JTextField("",20);JTextField jt6 = new JTextField("",20);
+		        JPasswordField jpf1 = new JPasswordField();JPasswordField jpf2 = new JPasswordField();
+		        jpf1.setEchoChar('*');jpf2.setEchoChar('*');
+//		        JTextField jt5 = new JTextField("",20);JTextField jt6 = new JTextField("",20);
 		        JRadioButton jr1 = new JRadioButton("男",true);JRadioButton jr2 = new JRadioButton("女");
 		        ButtonGroup G=new ButtonGroup();
+		        
+		        
 		        //设置提交按钮功能
 		        jb1.addActionListener(new ActionListener() {
    
 					@Override
 		            public void actionPerformed(ActionEvent e) {
-						System.out.println("提交成功");
+						//内容合法性校验
+						if(jt1.getText().equals("")||jt2.getText().equals("")|| jt3.getText().equals("")||jt4.getText().equals("")||jpf1.getText().equals("")) {
+							JOptionPane.showMessageDialog(null, "请正确填写信息！");
+							new StuEdit();
+							dispose();
+							return ;
+						}
+						//密码一致性校验
+						if(!(jpf1.getText().equals(jpf2.getText()))) {							
+							JOptionPane.showMessageDialog(null, "两次密码不匹配！！");					
+							jpf2.setText("");							
+							new StuEdit();
+							dispose();
+							return ;						
+						}
 						
-						
-						System.out.println(jt1.getText());System.out.println(jt2.getText());
-						System.out.println(jt3.getText());System.out.println(jt4.getText());
-						System.out.println(jt5.getText());System.out.println(jt6.getText());
-						System.out.println("Male="+jr1.isSelected());System.out.println("Female="+jr2.isSelected());
+						StudentDao.delStudent(finalId);
+						String genderTemp = "Null";
+						if(jr1.isSelected()) {genderTemp = "Male";} 
+						else {genderTemp = "Female";}
+						Student newStu = new Student(finalId, jt1.getText(), genderTemp, jt2.getText(), jt3.getText(), jt4.getText());
+						StudentDao.writeStudent(newStu);
+//						System.out.println(jt1.getText());System.out.println(jt2.getText());
+//						System.out.println(jt3.getText());System.out.println(jt4.getText());
+//						System.out.println(jt5.getText());System.out.println(jt6.getText());
+//						System.out.println("Male="+jr1.isSelected());System.out.println("Female="+jr2.isSelected());
 						JOptionPane.showMessageDialog(null, "提交成功！");
 						new StuOperation();
 		            	dispose();
@@ -266,7 +289,7 @@ public class Main{
 				cont.add(jl1);cont.add(jl2);cont.add(jl3);cont.add(jl4);
 				cont.add(jl5);cont.add(jl6);cont.add(jb1);cont.add(jb2);
 		        cont.add(jt1);cont.add(jt2);cont.add(jt3);cont.add(jt4);
-		        cont.add(jt5);cont.add(jt6);cont.add(jr1);cont.add(jr2);		        
+		        cont.add(jpf1);cont.add(jpf2);cont.add(jr1);cont.add(jr2);		        
 		        G.add(jr1);G.add(jr2);
 		        //控件在容器中的位置及大小
 		        jl1.setBounds(50,50,75,40);jr1.setBounds(150,125,75,40);
@@ -275,7 +298,7 @@ public class Main{
 		        jl5.setBounds(50,425,75,40);jl6.setBounds(50,500,75,40);
 		        jt1.setBounds(150,50,300,40);jt2.setBounds(150,200,300,40);
 		        jt3.setBounds(150,275,300,40);jt4.setBounds(150,350,300,40);
-		        jt5.setBounds(150,425,300,40);jt6.setBounds(150,500,300,40);
+		        jpf1.setBounds(150,425,300,40);jpf2.setBounds(150,500,300,40);
 		        jb1.setBounds(100,600,100,50);jb2.setBounds(300,600,100,50);
 		        //窗体在电脑中的位置及大小
 		        this.setBounds(720, 150, 500, 750);
@@ -286,7 +309,7 @@ public class Main{
 		    }
 		}
 		
-		
+		//学生成绩查询页面
 		//教师登录界面
 		@SuppressWarnings("serial")
 		public static class TeaOperation extends JFrame {
