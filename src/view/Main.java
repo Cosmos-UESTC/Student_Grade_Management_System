@@ -9,8 +9,12 @@ import javax.swing.*;
 
 import com.cn.dao.StudentDao;
 import com.cn.dao.AdministratorDao;
+import com.cn.dao.CourseDao;
+import com.cn.dao.ScoreDao;
 import com.cn.dao.TeacherDao;
 import com.cn.model.Admin;
+import com.cn.model.Course;
+import com.cn.model.Score;
 import com.cn.model.Student;
 import com.cn.model.Teacher;
 
@@ -18,6 +22,7 @@ import com.cn.model.Teacher;
 
 public class Main{
 		static String finalId = "-1";
+		static String finalCourseId = "-1";
 		@SuppressWarnings("serial")
 		public static class Login extends JFrame {
 			public Login() {
@@ -471,8 +476,10 @@ public class Main{
 //		}
 		
 		public static void main(String[] args){
-		 	new Login();
-			
+//		 	new Login();
+		 	
+//			Course Java = new Course("A00001", "Java", "6.0", "1-17", "100000002", "FuChong");
+//			Course C = new Course("A00002", "C", "4.0", "1-17", "100000001", "BaiZhongjian");			
 //			Admin HeadMaster = new Admin("000000001", "ZengYong", "Male", "19630101", "Management", "headMaster");
 //			Teacher LaoBai = new Teacher("100000001", "BaiZhongjian", "Male", "19800101", "Software_engineering", "lecturer");
 //			Teacher FuChong = new Teacher("100000002", "FuChong", "Male", "19800101", "Computer_science", "professor");
@@ -486,7 +493,12 @@ public class Main{
 //			Student JiaCheng = new Student("2019458802347", "YuanJiacheng", "Male", "20010808", "Communication_engineering", "Telecommunication");
 //			Student LanXin = new Student("2019271020123", "FuLanxin", "Female", "20010909", "Glasgow_Academy", "Communication_engineering");
 //			Student Cosmos = new Student("2019451610028", "Cosmos_Von", "Male", "20011010", "Foreign_languages_College", "English");
+//		 	Score Lvge = new Score("A00001", "Java", "100000002", "FuChong", "2019091602004", "CaiSiyuan", "99");
+//		 	Score Cosmos = new Score("A00001", "Java", "100000002", "FuChong", "2019091602014", "FengXinhyhue", "85");
+//		 	Score Lvge2 = new Score("A00002", "C", "100000001", "BaiZhongjian", "2019091602004", "CaiSiyuan", "90");
+//		 	Score Cosmos2 = new Score("A00002", "C", "100000001", "BaiZhongjian", "2019091602014", "FengXinhyhue", "90");
 //
+		 	
 //			AdministratorDao.writeAdmin(HeadMaster);
 //			TeacherDao.writeTeacher(LaoBai);
 //			TeacherDao.writeTeacher(FuChong);
@@ -500,14 +512,15 @@ public class Main{
 //			StudentDao.writeStudent(JiaCheng);
 //			StudentDao.writeStudent(LanXin);
 //			StudentDao.writeStudent(Cosmos);
-			
-			
-//			String str = "2019271020123";
-//			ArrayList<Student> newlist = new ArrayList<>();
-//			newlist = StudentDao.findStudent(str);
-//			Student foundStudent = newlist.get(0);
-//			System.out.println("Name="+foundStudent.getName()+" "+"ID="+foundStudent.getID());
-			
+//			CourseDao.writeCourse(Java);
+//			CourseDao.writeCourse(C);
+//		 	ScoreDao.writeScore(Lvge, "Java");
+//		 	ScoreDao.writeScore(Cosmos, "Java");
+//		 	ScoreDao.writeScore(Lvge2, "C");
+//		 	ScoreDao.writeScore(Cosmos2, "C");
+		 	
+
+//		 	System.out.println(Course.ifCourseExist(finalCourseId));                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
 	    }
 }
 

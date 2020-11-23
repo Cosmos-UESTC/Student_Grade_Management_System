@@ -1,5 +1,7 @@
 package com.cn.model;
 
+import com.cn.dao.CourseDao;
+
 public class Course {
 	private String courseId;
 	private String courseName;
@@ -8,14 +10,19 @@ public class Course {
 	private String courseTeacherId;
 	private String courseTeacherName;
 	
-	public Course (String courseId, String courseName, String courseCredit, String courseHours, String courseTeacherId, String courseTeacherName){
+//	public Course (String courseId, String courseName, String courseTeacherId, String courseTeacherName){
+//		super();
+//		
+//	}
+	
+	public Course (String courseId, String courseName, String courseCredit, String courseHours, String courseTeacherId, String courseTeacherName) {
 		super();
 		this.courseId = courseId;
 		this.courseName = courseName;
-		this.courseCredit = courseCredit;
-		this.courseHours = courseHours;
 		this.courseTeacherId = courseTeacherId;
 		this.courseTeacherName = courseTeacherName;
+		this.courseCredit = courseCredit;
+		this.courseHours = courseHours;
 	}
 	
 	public Course() {
@@ -46,6 +53,9 @@ public class Course {
 		return courseTeacherName;
 	}
 	
+	public static boolean ifCourseExist(String courseId) {
+		return !CourseDao.findCourse(courseId).isEmpty();
+	}
 	//////////////////////////////////////////////
 	
 	public void setcourseId(String courseId) {
@@ -68,9 +78,10 @@ public class Course {
 		this.courseTeacherId=courseTeacherId;
 	}
 	
-	public void courseTeacherName(String courseTeacherName) {
+	public void setcourseTeacherName(String courseTeacherName) {
 		this.courseTeacherName=courseTeacherName;
 	}
+	
 	
 	public void info() {
 		

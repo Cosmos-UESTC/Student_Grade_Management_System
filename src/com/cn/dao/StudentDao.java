@@ -35,6 +35,10 @@ public class StudentDao {
 	public static int writeStudent(Student student) {
 		ArrayList<Student> list = readStudent();
 		list.add(student);
+		if(Student.ifStudentExist(student.getID())) {
+			System.out.println("学生已经存在！\n");
+			return 0;
+		}
 		int num = 0;
 		try {
 			FileWriter fileWriter = new FileWriter("D:\\Eclipse-Workplace\\MNO_Grade_Management_System/src/data/student.txt");

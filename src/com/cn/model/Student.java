@@ -1,5 +1,7 @@
 package com.cn.model;
 
+import com.cn.dao.StudentDao;
+
 public class Student extends Person{
 	private String Major; //职位
 	
@@ -20,6 +22,10 @@ public class Student extends Person{
 		this.Major=Major;
 	}
 	//设置专业
+	
+	public static boolean ifStudentExist(String ID) {
+		return !StudentDao.findStudent(ID).isEmpty();
+	}
 	
 	public void info()
     {
