@@ -1,5 +1,7 @@
 package com.cn.model;
 
+import com.cn.dao.ScoreDao;
+
 public class Score {
 		private String courseId;
 		private String courseName;
@@ -49,6 +51,10 @@ public class Score {
 		
 		public String getstudentScore() {
 			return studentScore;
+		}
+		
+		public static boolean ifScoreExist(String studentId, String courseName) {
+			return !ScoreDao.findScore(studentId, courseName).isEmpty();
 		}
 		
 	///////////////////////

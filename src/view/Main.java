@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import com.cn.dao.StudentDao;
 import com.cn.dao.AdministratorDao;
@@ -175,6 +177,8 @@ public class Main{
 		            @Override
 		            public void actionPerformed(ActionEvent e) {
 		            	System.out.println("成绩查询");
+		            	new stuScoreCheck();
+//		            	dispose();
 		            }
 		        });
 		        //设置课程查询功能
@@ -315,9 +319,55 @@ public class Main{
 		}
 		
 		//学生成绩查询页面
-		public static class StuCheck extends JFrame{
-			
+		@SuppressWarnings("serial")
+		public static class stuScoreCheck extends JFrame {
+
+		    private JPanel contentPane;
+		    private DefaultTableModel defaultTableModel;
+		    private JTable table;
+		    Toolkit toolkit = Toolkit.getDefaultToolkit();
+		    private int DEFAULE_WIDTH = 1000;
+		    private int DEFAULE_HEIGH = 600;
+		    int Location_x = (int) (toolkit.getScreenSize().getWidth() - DEFAULE_WIDTH) / 2;
+		    int Location_y = (int) (toolkit.getScreenSize().getHeight() - DEFAULE_HEIGH) / 2;
+		    //自适应的屏幕缩放
+		    
+		    public stuScoreCheck() {
+
+		        contentPane = new JPanel();
+		        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		        contentPane.setLayout(new BorderLayout());
+		        
+		        ArrayList<Score> newlist1 = new ArrayList<>();
+		        newlist1 = ScoreDao.findScore(finalId, "Java");
+		        
+		        ArrayList<Score> newlist2 = new ArrayList<>();
+		        newlist2 = ScoreDao.findScore(finalId, "C");
+		        
+//		        String[] s = { "", "", "", "", "", "", ""};
+		        String[] n1 = { newlist1.get(0).getcourseId(), newlist1.get(0).getcourseName(), newlist1.get(0).getcourseTeacherId(), newlist1.get(0).getcourseTeacherName(),
+		        		newlist1.get(0).getstudentId(), newlist1.get(0).getstudentName(), newlist1.get(0).getstudentScore()};
+		        String[] n2 = { newlist2.get(0).getcourseId(), newlist2.get(0).getcourseName(), newlist2.get(0).getcourseTeacherId(), newlist2.get(0).getcourseTeacherName(),
+		        		newlist2.get(0).getstudentId(), newlist2.get(0).getstudentName(), newlist2.get(0).getstudentScore()};
+		        Object[][] p = {n1, n2};
+		        String[] n = { "课程代码", "课程名称", "教师ID", "教师姓名", "学号", "学生姓名","成绩"};
+
+		        defaultTableModel = new DefaultTableModel(p, n); // 用双数组创建DefaultTableModel对象
+		        table = new JTable(defaultTableModel);// 创建表格组件
+		        table.setRowHeight(30);// 设置表格行宽
+		        JScrollPane scrollPane = new JScrollPane(table, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+		        ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);// 创建滚动条组件，默认滚动条始终出现，初始化列表组件
+		        contentPane.add(scrollPane, BorderLayout.CENTER);
+
+		        setContentPane(contentPane);
+		        setTitle("成绩查询");
+		        setDefaultCloseOperation(DISPOSE_ON_CLOSE);//default = JFrame.EXIT_ON_CLOSE;
+		        setLocation(Location_x, Location_y);
+		        setSize(DEFAULE_WIDTH, DEFAULE_HEIGH);
+		        setVisible(true);
+		    }
 		}
+		    
 		//教师登录界面
 		@SuppressWarnings("serial")
 		public static class TeaOperation extends JFrame {
@@ -476,7 +526,7 @@ public class Main{
 //		}
 		
 		public static void main(String[] args){
-//		 	new Login();
+		 	new Login();
 		 	
 //			Course Java = new Course("A00001", "Java", "6.0", "1-17", "100000002", "FuChong");
 //			Course C = new Course("A00002", "C", "4.0", "1-17", "100000001", "BaiZhongjian");			
@@ -486,7 +536,7 @@ public class Main{
 //			Student testStudent = new Student("2019091601001", "Unknown", "Male", "20000101", "Software_engineering", "Network_security");
 //			Student LvGe = new Student("2019091602004", "CaiSiyuan", "Male", "20010202", "Software_engineering", "Network_security");
 //			Student XuanXuanxuan = new Student("2019091602005", "PengXuanyue", "Male", "20000303", "Software_engineering", "Embedded_system");
-//			Student YueXinfeng = new Student("2019091602014", "FengXinyue", "Male", "20010404", "Software_engineering", "Network_security");
+			Student YueXinfeng = new Student("2019091602014", "FengXinyue", "Male", "20010404", "Software_engineering", "Network_security");
 //			Student HuangLao = new Student("2019091602025", "HuangZizhan", "Male", "20010505", "Software_engineering", "Digital_animation");
 //			Student LinShudan = new Student("2019091602027", "LinShudan", "Female", "20010606", "Software_engineering", "System_and_technology");
 //			Student XiuEr = new Student("2019091602009", "ShiMaoyuam", "Male", "20060707", "Software_engineering", "Digital_information_processing");
@@ -497,7 +547,7 @@ public class Main{
 //		 	Score Cosmos = new Score("A00001", "Java", "100000002", "FuChong", "2019091602014", "FengXinhyhue", "85");
 //		 	Score Lvge2 = new Score("A00002", "C", "100000001", "BaiZhongjian", "2019091602004", "CaiSiyuan", "90");
 //		 	Score Cosmos2 = new Score("A00002", "C", "100000001", "BaiZhongjian", "2019091602014", "FengXinhyhue", "90");
-//
+
 		 	
 //			AdministratorDao.writeAdmin(HeadMaster);
 //			TeacherDao.writeTeacher(LaoBai);
@@ -519,8 +569,9 @@ public class Main{
 //		 	ScoreDao.writeScore(Lvge2, "C");
 //		 	ScoreDao.writeScore(Cosmos2, "C");
 		 	
-
-//		 	System.out.println(Course.ifCourseExist(finalCourseId));                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+		 	
+//		 	System.out.println(Course.ifCourseExist(finalCourseId));     
+//		 	System.out.println(Score.ifScoreExist(finalId,"Java"));
 	    }
 }
 
