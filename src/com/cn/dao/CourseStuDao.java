@@ -14,7 +14,7 @@ public class CourseStuDao {
 	//从选课记录读取信息
 			static String finalFileName = "-1";	
 			public static ArrayList<CourseStu> readCourseStu(String finalCourseName){
-				ArrayList<CourseStu> list = new ArrayList<>();  //新建链表
+				ArrayList<CourseStu> list = new ArrayList<>(); 
 				finalFileName = "D:\\Eclipse-Workplace\\MNO_Grade_Management_System/src/data/" + finalCourseName + "_student.txt";
 				try (BufferedReader br = new BufferedReader(new FileReader(finalFileName))) {
 					String line = br.readLine();
