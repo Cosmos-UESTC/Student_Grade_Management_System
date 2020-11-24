@@ -21,6 +21,7 @@ import com.cn.model.CourseStu;
 import com.cn.model.Score;
 import com.cn.model.Student;
 import com.cn.model.Teacher;
+import com.cn.util.StringUtil;
 
 @SuppressWarnings("unused")
 
@@ -54,6 +55,20 @@ public class Main{
 		            	finalId = jt.getText();
 		            	int flag = 999;
 		            	System.out.println(!StudentDao.findStudent(finalId).isEmpty());
+		          if(StringUtil.isNull(finalId)  ) {
+		        	  	System.out.println("输入为空！");
+		        	  	JOptionPane.showMessageDialog(null, "输入为空！");
+	                    JOptionPane.showMessageDialog(null, "请输入正确的ID！");
+	                    
+	                    jt.requestFocus();
+		          } 
+		          else if(!StringUtil.isNumeric(finalId)) {
+		        	  	System.out.println("格式错误！");
+		        	  	JOptionPane.showMessageDialog(null, "格式错误！");
+	                    JOptionPane.showMessageDialog(null, "请输入合法的ID！");
+	                    jt.requestFocus();
+		          }
+		          else {
 		            	if(!StudentDao.findStudent(finalId).isEmpty()) {
 //		            		ArrayList<Student> newlist = new ArrayList<>();
 //			    			newlist = StudentDao.findStudent(finalId);
@@ -78,7 +93,7 @@ public class Main{
 //		    			Admin foundAdmin = newlist2.get(0);
 //		    			System.out.println("Name="+foundAdmin.getName()+" "+"ID="+foundAdmin.getID());
 		    			
-		            	jt.setText("*********");//此处原则上应改写为加密后的ID号
+		            	jt.setText("");//此处原则上应改写为加密后的ID号
 //		                jpf.setText("");	//次数可以为“*******”	 
 		            	     
 		                    
@@ -104,7 +119,7 @@ public class Main{
 				                    JOptionPane.showMessageDialog(null, "请输入正确的ID！");
 				                    jt.requestFocus();
 		                    }
-        
+		          		}
 		            }
 		        });
 		        
@@ -273,7 +288,14 @@ public class Main{
 							dispose();
 							return ;						
 						}
-						
+						if(StringUtil.isNumeric(jt2.getText())) {
+							JOptionPane.showMessageDialog(null, "日期格式非法！！");	
+							JOptionPane.showMessageDialog(null, "格式参考：yyyy-MM-dd");	
+							jpf2.setText("");							
+							new StuEdit();
+							dispose();
+							return ;
+						}
 						StudentDao.delStudent(finalId);
 						String genderTemp = "Null";
 						if(jr1.isSelected()) {genderTemp = "Male";} 
@@ -580,7 +602,6 @@ public class Main{
 //		        this.setVisible(true);
 //		    }
 //		}
-		
 		public static void main(String[] args){
 		 	new Login();
 		 	
