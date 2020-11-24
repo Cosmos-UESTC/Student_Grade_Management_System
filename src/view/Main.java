@@ -3,19 +3,21 @@ package view;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
+import java.util.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import com.cn.dao.StudentDao;
 import com.cn.dao.AdministratorDao;
 import com.cn.dao.CourseDao;
+import com.cn.dao.CourseStuDao;
 import com.cn.dao.ScoreDao;
+import com.cn.dao.StudentDao;
 import com.cn.dao.TeacherDao;
+
 import com.cn.model.Admin;
 import com.cn.model.Course;
+import com.cn.model.CourseStu;
 import com.cn.model.Score;
 import com.cn.model.Student;
 import com.cn.model.Teacher;
@@ -186,6 +188,8 @@ public class Main{
 		        	@Override
 		            public void actionPerformed(ActionEvent e) {
 		            	System.out.println("课程查询");
+		            	new stuCourseCheck();
+//		            	dispose;
 		            }
 		        });		        
 		        //设置修改信息功能
@@ -368,6 +372,58 @@ public class Main{
 		    }
 		}
 		    
+		//学生课程查询界面
+		@SuppressWarnings("serial")
+		public static class stuCourseCheck extends JFrame{
+			private JPanel contentPane;
+		    private DefaultTableModel defaultTableModel;
+		    private JTable table;
+		    Toolkit toolkit = Toolkit.getDefaultToolkit();
+		    private int DEFAULE_WIDTH = 1000;
+		    private int DEFAULE_HEIGH = 600;
+		    int Location_x = (int) (toolkit.getScreenSize().getWidth() - DEFAULE_WIDTH) / 2;
+		    int Location_y = (int) (toolkit.getScreenSize().getHeight() - DEFAULE_HEIGH) / 2;
+		    //自适应的屏幕缩放
+		    
+		    public stuCourseCheck() {
+
+		        contentPane = new JPanel();
+		        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		        contentPane.setLayout(new BorderLayout());
+		        ArrayList<CourseStu> list1 = new ArrayList<>();
+		        list1 = CourseStuDao.findCourseStu(finalId,"java");
+		        ArrayList<CourseStu> list2 = new ArrayList<>();
+		        list2 = CourseStuDao.findCourseStu(finalId,"c");
+		        String str1 = list1.get(0).getCourseId();
+		        String str2 = list2.get(0).getCourseId();
+		        ArrayList<Course> newlist1 = new ArrayList<>();
+		        newlist1 = CourseDao.findCourse(str1);
+		        
+		        ArrayList<Course> newlist2 = new ArrayList<>();
+		        newlist2 = CourseDao.findCourse(str2);
+		        
+//		        String[] s = { "", "", "", "", "", "", ""};
+		        CourseStu.ifCourseStuExist("java", finalId);
+		        String[] n1 = { newlist1.get(0).getcourseId(), newlist1.get(0).getcourseName(), newlist1.get(0).getcourseCredit(), newlist1.get(0).getcourseHours()};
+		        String[] n2 = { newlist2.get(0).getcourseId(), newlist2.get(0).getcourseName(), newlist2.get(0).getcourseCredit(), newlist1.get(0).getcourseHours()};
+		        Object[][] p = {n1, n2};
+		        String[] n = { "课程代码", "课程名称", "学分", "学时"};
+
+		        defaultTableModel = new DefaultTableModel(p, n); // 用双数组创建DefaultTableModel对象
+		        table = new JTable(defaultTableModel);// 创建表格组件
+		        table.setRowHeight(30);// 设置表格行宽
+		        JScrollPane scrollPane = new JScrollPane(table, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+		        ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);// 创建滚动条组件，默认滚动条始终出现，初始化列表组件
+		        contentPane.add(scrollPane, BorderLayout.CENTER);
+
+		        setContentPane(contentPane);
+		        setTitle("课表查询");
+		        setDefaultCloseOperation(DISPOSE_ON_CLOSE);//default = JFrame.EXIT_ON_CLOSE;
+		        setLocation(Location_x, Location_y);
+		        setSize(DEFAULE_WIDTH, DEFAULE_HEIGH);
+		        setVisible(true);
+		    }
+		}
 		//教师登录界面
 		@SuppressWarnings("serial")
 		public static class TeaOperation extends JFrame {

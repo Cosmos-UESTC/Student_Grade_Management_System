@@ -89,11 +89,11 @@ public class ScoreDao {
 			}
 		//******************************************************//
 			//查询成绩信息
-			public static ArrayList<Score> findScore(String studentId, String finalCourseName) {
-				ArrayList<Score> list = readScore(finalCourseName);
+			public static ArrayList<Score> findScore(String courseName, String stuId) {
+				ArrayList<Score> list = readScore(courseName);
 				ArrayList<Score> newlist = new ArrayList<>();
 				for (int i = 0; i < list.size(); i++) {
-					if (list.get(i).getstudentId().equals(studentId)){
+					if (list.get(i).getstudentId().equals(stuId)){
 						newlist.add(list.get(i));				
 					}
 				}	

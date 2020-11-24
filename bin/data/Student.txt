@@ -15,3 +15,4 @@
 2019091602009 ShiMaoyuam Male 20060707 Software_engineering Digital_information_processing
 2019458802347 YuanJiacheng Male 20010808 Communication_engineering Telecommunication
 2019271020123 FuLanxin Female 20010909 Glasgow_Academy Communication_engineering
+2019091602014 FengXinyue Male 20010404 Software_engineering Network_security

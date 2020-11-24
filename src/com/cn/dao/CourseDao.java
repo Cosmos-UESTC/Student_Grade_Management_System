@@ -6,7 +6,7 @@ import com.cn.model.Course;
 
 public class CourseDao {
 	//从文件读取课程信息
-		public static ArrayList<Course> readCourse(){
+			public static ArrayList<Course> readCourse(){
 			ArrayList<Course> list = new ArrayList<>();  //新建链表
 			try (BufferedReader br = new BufferedReader(new FileReader("D:\\Eclipse-Workplace\\MNO_Grade_Management_System/src/data/course.txt"))) {
 				String line = br.readLine();
