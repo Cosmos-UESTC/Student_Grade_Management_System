@@ -262,7 +262,7 @@ public class GUI {
 			        contentPane.add(scrollPane, BorderLayout.CENTER);
 
 			        setVisible(true);
-			        setTitle("课表查询");
+			        setTitle("成绩查询");
 			        setContentPane(contentPane);
 			        setLocation(Location_x, Location_y);
 			        setSize(DEFAULE_WIDTH, DEFAULE_HEIGH);
@@ -303,9 +303,9 @@ public class GUI {
 			        
 //			        CourseStu.ifCourseStuExist("java", finalId);
 			        String[] s = {"","","",""};
-			        String[] n = { "课程代码", "课程名称", "学分", "学时"};
-			        String[] n1 = { newlist1.get(0).getcourseId(), newlist1.get(0).getcourseName(), newlist1.get(0).getcourseCredit(), newlist1.get(0).getcourseHours()};
-			        String[] n2 = { newlist2.get(0).getcourseId(), newlist2.get(0).getcourseName(), newlist2.get(0).getcourseCredit(), newlist1.get(0).getcourseHours()};
+			        String[] n = { "课程代码", "课程名称", "学分", "学时", "任课教师"};
+			        String[] n1 = { newlist1.get(0).getcourseId(), newlist1.get(0).getcourseName(), newlist1.get(0).getcourseCredit(), newlist1.get(0).getcourseHours(), newlist1.get(0).getcourseTeacherName()};
+			        String[] n2 = { newlist2.get(0).getcourseId(), newlist2.get(0).getcourseName(), newlist2.get(0).getcourseCredit(), newlist1.get(0).getcourseHours(), newlist1.get(0).getcourseTeacherName()};
 			        if(list1.isEmpty() && list2.isEmpty()) {
 			        	Object[][] p = {s, s};
 			        	defaultTableModel = new DefaultTableModel(p, n); // 用双数组创建DefaultTableModel对象
