@@ -1,2 +1,2 @@
+100000001 BaiZhongjian Male 19800101 Software_engineering lecturer
 100000002 FuChong Male 19800101 Computer_science professor
-100000001 BaiZhongjian Male 1980-02-02 CS Master
