@@ -1,21 +1,17 @@
 package com.cn.dao;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-
+import java.io.*;
+import java.util.*;
 import com.cn.model.CourseStu;
 
 
 public class CourseStuDao {
-	//从选课记录读取信息
+			
 			static String finalFileName = "-1";	
-			public static ArrayList<CourseStu> readCourseStu(String finalCourseName){
+			//从选课记录读取信息
+			public static ArrayList<CourseStu> readCourseStu(String CourseName){
 				ArrayList<CourseStu> list = new ArrayList<>(); 
-				finalFileName = "D:\\Eclipse-Workplace\\MNO_Grade_Management_System/src/data/" + finalCourseName + "_student.txt";
+				finalFileName = "src/data/" + CourseName + "_student.txt";
 				try (BufferedReader br = new BufferedReader(new FileReader(finalFileName))) {
 					String line = br.readLine();
 					String[] textData = null;
@@ -36,9 +32,11 @@ public class CourseStuDao {
 				}	
 				return list;
 			}
-	//写信息到花名册
-			public static int writeCourseStu(CourseStu coursestu, String finalCourseName) {
-				ArrayList<CourseStu> list = readCourseStu(finalCourseName);
+			
+			//写信息到花名册
+			public static int writeCourseStu(CourseStu coursestu, String CourseName) {
+				ArrayList<CourseStu> list = readCourseStu(CourseName);
+				finalFileName = "src/data/" + CourseName + "_student.txt";
 				list.add(coursestu);
 				int num = 0;
 				try {
@@ -56,9 +54,11 @@ public class CourseStuDao {
 				}
 				return num;
 			}
-	//删除花名册信息
-			public static int delCourseStu(String CourseStuId, String finalCourseName) {
-				ArrayList<CourseStu> list = readCourseStu(finalCourseName);
+			
+			//删除花名册信息
+			public static int delCourseStu(String CourseStuId, String CourseName) {
+				ArrayList<CourseStu> list = readCourseStu(CourseName);
+				finalFileName = "src/data/" + CourseName + "_student.txt";
 				int num = 0;
 				for (int i = 0; i < list.size(); i++) {
 					if (CourseStuId.equals(list.get(i).getCourseStuId())) {
@@ -80,9 +80,10 @@ public class CourseStuDao {
 				}
 				return num;
 			}
-	//查询花名册信息
-			public static ArrayList<CourseStu> findCourseStu(String CourseStuId, String finalCourseName) {
-				ArrayList<CourseStu> list = readCourseStu(finalCourseName);
+			
+			//查询花名册信息
+			public static ArrayList<CourseStu> findCourseStu(String CourseStuId, String CourseName) {
+				ArrayList<CourseStu> list = readCourseStu(CourseName);
 				ArrayList<CourseStu> newlist = new ArrayList<>();
 				for (int i = 0; i < list.size(); i++) {
 					if (list.get(i).getCourseStuId().equals(CourseStuId)){

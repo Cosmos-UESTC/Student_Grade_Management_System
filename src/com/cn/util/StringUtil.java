@@ -35,6 +35,10 @@ public class StringUtil {
 
         return str.matches(reg);
 	}
-
+	
+	public static boolean isScoreLegal(int score) {
+		
+		return ((score >= 0) && (score <=100)) ? true : false;
+	}
 }
 

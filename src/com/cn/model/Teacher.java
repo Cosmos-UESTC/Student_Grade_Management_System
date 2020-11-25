@@ -1,5 +1,7 @@
 package com.cn.model;
 
+import com.cn.dao.TeacherDao;
+
 public class Teacher extends Person{
 	private String Title; //÷∞≥∆
 	
@@ -16,6 +18,10 @@ public class Teacher extends Person{
 		this.Title=Title;
 	}
 	//…Ë÷√÷∞≥∆
+	
+	public static boolean ifTeacherExist(String ID) {
+		return !TeacherDao.findTeacher(ID).isEmpty();
+	}
 	
 	public void info()
     {

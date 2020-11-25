@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import com.cn.model.Score;
 
 public class ScoreDao {
-	//从文件读取分数信息
+		
 		static String finalFileName = "-1";	
-		public static ArrayList<Score> readScore(String finalCourseName){
-				ArrayList<Score> list = new ArrayList<>();  //新建链表
-//				Scanner s = new Scanner(System.in);
-				finalFileName = "D:\\Eclipse-Workplace\\MNO_Grade_Management_System/src/data/" + finalCourseName + ".txt";
+		//从文件读取分数信息
+		public static ArrayList<Score> readScore(String CourseName){
+				ArrayList<Score> list = new ArrayList<>();
+				finalFileName = "src/data/" + CourseName + ".txt";
 				try (BufferedReader br = new BufferedReader(new FileReader(finalFileName))) {
 					String line = br.readLine();
 					String[] textData = null;
@@ -38,11 +38,11 @@ public class ScoreDao {
 				}	
 				return list;
 			}
-		//******************************************************//
+
 			//写成绩信息到文件
 			public static int writeScore(Score score, String finalCourseName) {
 				ArrayList<Score> list = readScore(finalCourseName);
-				finalFileName = "D:\\Eclipse-Workplace\\MNO_Grade_Management_System/src/data/" + finalCourseName + ".txt";
+				finalFileName = "src/data/" + finalCourseName + ".txt";
 				list.add(score);
 				int num = 0;
 				try {
@@ -61,10 +61,11 @@ public class ScoreDao {
 				}
 				return num;
 			}
-		//******************************************************//
+ 
 			//删除对应学生成绩
 			public static int delScore(String studentId, String finalCourseName) {
 				ArrayList<Score> list = readScore(finalCourseName);
+				finalFileName = "src/data/" + finalCourseName + ".txt";
 				int num = 0;
 				for (int i = 0; i < list.size(); i++) {
 					if (studentId.equals(list.get(i).getstudentId())) {
@@ -87,7 +88,7 @@ public class ScoreDao {
 				}
 				return num;
 			}
-		//******************************************************//
+
 			//查询成绩信息
 			public static ArrayList<Score> findScore(String courseName, String stuId) {
 				ArrayList<Score> list = readScore(courseName);
@@ -99,4 +100,5 @@ public class ScoreDao {
 				}	
 				return newlist;		
 			}
+			
 }

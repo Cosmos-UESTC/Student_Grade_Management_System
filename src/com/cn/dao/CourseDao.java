@@ -5,10 +5,11 @@ import java.util.*;
 import com.cn.model.Course;
 
 public class CourseDao {
-	//从文件读取课程信息
-			public static ArrayList<Course> readCourse(){
-			ArrayList<Course> list = new ArrayList<>();  //新建链表
-			try (BufferedReader br = new BufferedReader(new FileReader("D:\\Eclipse-Workplace\\MNO_Grade_Management_System/src/data/course.txt"))) {
+	
+		//从文件读取课程信息
+		public static ArrayList<Course> readCourse(){
+			ArrayList<Course> list = new ArrayList<>();
+			try (BufferedReader br = new BufferedReader(new FileReader("src/data/course.txt"))) {
 				String line = br.readLine();
 				String[] textData = null;
 				while (line != null) {
@@ -30,14 +31,14 @@ public class CourseDao {
 			}	
 			return list;
 		}
-	//******************************************************//
+
 		//写课程信息到文件
 		public static int writeCourse(Course course) {
 			ArrayList<Course> list = readCourse();
 			list.add(course);
 			int num = 0;
 			try {
-				FileWriter fileWriter = new FileWriter("D:\\Eclipse-Workplace\\MNO_Grade_Management_System/src/data/course.txt");
+				FileWriter fileWriter = new FileWriter("src/data/course.txt");
 				for (int i = 0; i < list.size(); i++) {
 					Course cou = list.get(i);
 					fileWriter.write(
@@ -52,8 +53,8 @@ public class CourseDao {
 			}
 			return num;
 		}
-	//******************************************************//
-		//删除对应学生信息
+
+		//删除对应课程信息
 		public static int delCourse(String courseId) {
 			ArrayList<Course> list = readCourse();
 			int num = 0;
@@ -63,7 +64,7 @@ public class CourseDao {
 				}
 			}
 			try {
-				FileWriter fileWriter = new FileWriter("D:\\Eclipse-Workplace\\MNO_Grade_Management_System/src/data/course.txt");
+				FileWriter fileWriter = new FileWriter("src/data/course.txt");
 				for (int i = 0; i < list.size(); i++) {
 					Course cou = list.get(i);
 					fileWriter.write(
@@ -78,13 +79,24 @@ public class CourseDao {
 			}
 			return num;
 		}
-	//******************************************************//
+
 		//查询课程信息
 		public static ArrayList<Course> findCourse(String courseId) {
 			ArrayList<Course> list = readCourse();
 			ArrayList<Course> newlist = new ArrayList<>();
 			for (int i = 0; i < list.size(); i++) {
 				if (list.get(i).getcourseId().equals(courseId)){
+					newlist.add(list.get(i));				
+				}
+			}	
+			return newlist;		
+		}
+		
+		public static ArrayList<Course> findCourseTea(String teacherId) {
+			ArrayList<Course> list = readCourse();
+			ArrayList<Course> newlist = new ArrayList<>();
+			for (int i = 0; i < list.size(); i++) {
+				if (list.get(i).getcourseTeacherId().equals(teacherId)){
 					newlist.add(list.get(i));				
 				}
 			}	
