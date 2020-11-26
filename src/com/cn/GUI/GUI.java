@@ -598,7 +598,6 @@ public class GUI {
 			        jb1.addActionListener(new ActionListener() {
 						@Override
 			            public void actionPerformed(ActionEvent e) {
-							String courseName = CourseDao.findCourse(jt1.getText()).get(0).getcourseName();
 							//内容合法性校验
 							if(jt1.getText().equals("")||jt2.getText().equals("")|| jt3.getText().equals("")||jt4.getText().equals("")) {
 								JOptionPane.showMessageDialog(null, "请正确填写信息！");
@@ -606,6 +605,7 @@ public class GUI {
 								dispose();
 								return ;
 							}
+							String courseName = CourseDao.findCourse(jt1.getText()).get(0).getcourseName();
 							//教师权限检验
 							if(CourseDao.findCourseTea(finalId).isEmpty() || (!CourseDao.findCourseTea(finalId).get(0).getcourseId().equals(jt1.getText()))) {
 								JOptionPane.showMessageDialog(null, "您无权限修改本课程！");
